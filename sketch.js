@@ -243,12 +243,14 @@ function revealAnswer() {
   feedback.classList.remove('hidden');
   feedback.className = 'feedback correct';
   
-  // Create explanation
-  let explanation = `<strong>${currentItem.word}</strong><br>`;
-  explanation += `${currentItem.definition}<br><br>`;
-  explanation += `<em>💡 Context: ${currentItem.example}</em><br><br>`;
+  // Create full explanation
+  let explanation = `<strong>📖 ${currentItem.word}</strong><br><br>`;
+  explanation += `<strong>Betekenis:</strong><br>${currentItem.definition}<br><br>`;
+  explanation += `<strong>Voorbeeld in context:</strong><br><em>"${currentItem.example}"</em><br><br>`;
+  explanation += `<strong>💡 Wanneer gebruiken?</strong><br>`;
   explanation += `Dit woord komt vaak voor in formele teksten en professionele communicatie. `;
-  explanation += `Probeer het deze week eens te gebruiken!`;
+  explanation += `Het wordt gebruikt om ideeën genuanceerd en precies uit te drukken. `;
+  explanation += `Probeer het deze week eens te gebruiken in een e-mail of gesprek!`;
   
   feedback.innerHTML = explanation;
   document.getElementById('action-buttons').classList.remove('hidden');
@@ -269,24 +271,32 @@ function checkAnswer() {
   
   if (isClose) {
     explanation += `<strong>✓ Uitstekend!</strong><br><br>`;
-    explanation += `<strong>${currentItem.word}</strong> betekent: ${currentItem.definition}<br><br>`;
-    explanation += `<em>Voorbeeld: "${currentItem.example}"</em><br><br>`;
-    explanation += `<strong>💡 Waarom goed?</strong> Je herkende de definitie correct. `;
-    explanation += `Dit woord wordt vaak gebruikt in formele situaties en academische teksten.`;
+    explanation += `<strong>📖 ${currentItem.word}</strong><br><br>`;
+    explanation += `<strong>Betekenis:</strong><br>${currentItem.definition}<br><br>`;
+    explanation += `<strong>Voorbeeld in context:</strong><br><em>"${currentItem.example}"</em><br><br>`;
+    explanation += `<strong>💡 Waarom goed?</strong><br>`;
+    explanation += `Je herkende de definitie correct! Dit woord wordt vaak gebruikt in formele situaties en academische teksten. `;
+    explanation += `Het helpt om ideeën precies en genuanceerd uit te drukken.`;
     feedback.className = 'feedback correct';
   } else {
-    explanation += `<strong>Het juiste woord is "${currentItem.word}"</strong><br><br>`;
-    explanation += `${currentItem.definition}<br><br>`;
-    explanation += `<em>Voorbeeld: "${currentItem.example}"</em><br><br>`;
+    explanation += `<strong>📖 Het juiste woord is: ${currentItem.word}</strong><br><br>`;
+    explanation += `<strong>Betekenis:</strong><br>${currentItem.definition}<br><br>`;
+    explanation += `<strong>Voorbeeld in context:</strong><br><em>"${currentItem.example}"</em><br><br>`;
     
     if (userAnswer) {
-      explanation += `<strong>💡 Let op:</strong> Je antwoordde "${userAnswer}". `;
-      explanation += `Onthoud: "${currentItem.word}" heeft specifiek te maken met ${currentItem.definition.toLowerCase()}. `;
-      explanation += `Probeer het woord te koppelen aan het voorbeeld!`;
+      explanation += `<strong>💡 Let op:</strong><br>`;
+      explanation += `Je antwoordde "${userAnswer}". `;
+      explanation += `Onthoud: "${currentItem.word}" verwijst specifiek naar ${currentItem.definition.toLowerCase()}. `;
+      explanation += `Probeer het woord te koppelen aan het voorbeeld - lees de voorbeeldzin een paar keer hardop voor.`;
     } else {
-      explanation += `<strong>💡 Tip:</strong> Lees de definitie nog eens goed. `;
-      explanation += `Probeer het woord te onthouden door de voorbeeldzin een paar keer te herhalen.`;
+      explanation += `<strong>💡 Onthoudtip:</strong><br>`;
+      explanation += `Lees de definitie en voorbeeldzin nog eens goed door. `;
+      explanation += `Probeer een eigen zinnetje te bedenken met "${currentItem.word}" om het beter te onthouden.`;
     }
+    
+    explanation += `<br><br><strong>Wanneer gebruiken?</strong><br>`;
+    explanation += `Dit woord past goed in formele schrijfsituaties zoals rapportages, essays of zakelijke e-mails.`;
+    
     feedback.className = 'feedback incorrect';
   }
   
@@ -319,10 +329,13 @@ function selectChoice(selectedIndex, btnElement) {
     setTimeout(() => {
       const feedback = document.getElementById('feedback');
       let explanation = `<strong>✓ Prima gedaan!</strong><br><br>`;
-      explanation += `<strong>${currentItem.name}</strong>: ${currentItem.definition}<br><br>`;
-      explanation += `<em>Voorbeeld: "${currentItem.example}"</em><br><br>`;
-      explanation += `<strong>💡 Waarom "${correctAnswer}"?</strong> `;
+      explanation += `<strong>📖 ${currentItem.name}</strong><br><br>`;
+      explanation += `<strong>Definitie:</strong><br>${currentItem.definition}<br><br>`;
+      explanation += `<strong>Het voorbeeld:</strong><br><em>"${currentItem.example}"</em><br><br>`;
+      explanation += `<strong>💡 Waarom is dit ${correctAnswer}?</strong><br>`;
       explanation += getStyleExplanation(currentItem.name, currentItem.example);
+      explanation += `<br><br><strong>Toepassing:</strong><br>`;
+      explanation += `Je kunt deze stijlfiguur gebruiken om je teksten expressiever, levendiger of overtuigender te maken.`;
       feedback.innerHTML = explanation;
       feedback.className = 'feedback correct';
       feedback.classList.remove('hidden');
@@ -334,17 +347,56 @@ function selectChoice(selectedIndex, btnElement) {
     setTimeout(() => {
       const feedback = document.getElementById('feedback');
       const wrongAnswer = currentItem.choices[selectedIndex];
-      let explanation = `<strong>Het juiste antwoord is "${correctAnswer}"</strong><br><br>`;
-      explanation += `<strong>${currentItem.name}</strong>: ${currentItem.definition}<br><br>`;
-      explanation += `<em>Voorbeeld: "${currentItem.example}"</em><br><br>`;
-      explanation += `<strong>💡 Verschil met "${wrongAnswer}":</strong> `;
-      explanation += getComparisonExplanation(correctAnswer, wrongAnswer, currentItem.example);
+      let explanation = `<strong>📖 Het juiste antwoord is: ${correctAnswer}</strong><br><br>`;
+      explanation += `<strong>Wat is ${currentItem.name}?</strong><br>${currentItem.definition}<br><br>`;
+      explanation += `<strong>Het voorbeeld:</strong><br><em>"${currentItem.example}"</em><br><br>`;
+      explanation += `<strong>💡 Waarom ${correctAnswer} en niet ${wrongAnswer}?</strong><br>`;
+      explanation += getComparisonExplanation(correctAnswer, wrongAnswer, currentItem.name, currentItem.example);
+      explanation += `<br><br><strong>Onthoudtip:</strong><br>`;
+      explanation += `${getMemoryTip(currentItem.name)}`;
       feedback.innerHTML = explanation;
       feedback.className = 'feedback incorrect';
       feedback.classList.remove('hidden');
       document.getElementById('action-buttons').classList.remove('hidden');
     }, 500);
   }
+}
+
+function getMemoryTip(styleName) {
+  const tips = {
+    'Metafoor': 'Metafoor = verborgen vergelijking. Als je "als" of "zoals" ziet, is het GEEN metafoor.',
+    'Personificatie': 'Personificatie = persoon maken. Denk: kan een ding dit eigenlijk doen? Nee? Dan is het personificatie.',
+    'Hyperbool': 'Hyperbool = overdrijving. Letterlijk onmogelijk maar wel duidelijk bedoeld.',
+    'Ironie': 'Ironie = tegenovergestelde bedoelen. Let op de context en toon.',
+    'Alliteratie': 'Alliteratie = beginletters hetzelfde. Luister naar de eerste klanken.',
+    'Eufemisme': 'Eufemisme = verzachten. Een vriendelijkere manier om iets naars te zeggen.',
+    'Anafoor': 'Anafoor = herhaling aan het BEGIN. Epistrofe is aan het einde.',
+    'Allegorie': 'Allegorie = doorlopend verhaal met verborgen betekenis. Hele verhaal is symbolisch.',
+    'Paradox': 'Paradox = lijkt tegenstrijdig maar klopt toch. "Minder is meer".',
+    'Litotes': 'Litotes = ontkenning van het tegenovergestelde. "Niet onverstandig" = verstandig.',
+    'Symboliek': 'Symboliek = staat voor iets anders. Object heeft diepere betekenis.',
+    'Assonantie': 'Assonantie = klinkers herhalen (a, e, i, o, u). Alliteratie = medeklinkers.',
+    'Antithese': 'Antithese = tegenstelling. Twee dingen staan tegenover elkaar.',
+    'Retorische vraag': 'Retorische vraag = geen antwoord nodig. Het antwoord is voor iedereen duidelijk.',
+    'Oxymoron': 'Oxymoron = twee woorden die elkaar tegenspreken. "Oorverdovende stilte".',
+    'Metonymie': 'Metonymie = vervangen door gerelateerd begrip. "Het Witte Huis" = de president.',
+    'Synecdoche': 'Synecdoche = deel voor geheel. "Alle handen" = alle mensen.',
+    'Chiasme': 'Chiasme = kruislings herhalen. AB-BA patroon.',
+    'Climax': 'Climax = opbouwen naar hoogtepunt. Steeds belangrijker/sterker.',
+    'Apostrofe': 'Apostrofe = iets afwezigs aanspreken. Alsof het er is.',
+    'Parallelisme': 'Parallelisme = zelfde zinsbouw herhalen. Ritme door herhaling.',
+    'Enjambement': 'Enjambement = doorlopen over versregel. Zin stopt niet bij regeleinde.',
+    'Onomatopee': 'Onomatopee = geluid nabootsen. "Boem", "zoem", "krak".',
+    'Ellips': 'Ellips = woorden weglaten. Context maakt het duidelijk.',
+    'Vergelijking': 'Vergelijking = expliciet met "als" of "zoals". Metafoor is verborgen.',
+    'Epistrofe': 'Epistrofe = herhaling aan het EINDE. Anafoor is aan het begin.',
+    'Archaïsme': 'Archaïsme = verouderde woorden. "Alzo", "wederom", etc.',
+    'Zeugma': 'Zeugma = één werkwoord, twee betekenissen. Letterlijk én figuurlijk.',
+    'Anticlimax': 'Anticlimax = teleurstelling na opbouw. Van belangrijk naar onbelangrijk.',
+    'Pleonasme': 'Pleonasme = overbodige herhaling. Versterkt maar is niet nodig.'
+  };
+  
+  return tips[styleName] || 'Let goed op de definitie en het voorbeeld om dit stijlfiguur te herkennen.';
 }
 
 function getStyleExplanation(styleName, example) {
@@ -384,29 +436,38 @@ function getStyleExplanation(styleName, example) {
   return explanations[styleName] || 'Dit stijlfiguur wordt vaak gebruikt om teksten levendiger en expressiever te maken.';
 }
 
-function getComparisonExplanation(correct, wrong, example) {
+function getComparisonExplanation(correct, wrong, styleName, example) {
+  // First provide what the correct answer IS
+  let explanation = getStyleExplanation(styleName, example);
+  explanation += `<br><br>`;
+  
+  // Then explain the difference
   const comparisons = {
-    'Metafoor_Personificatie': 'Metafoor vergelijkt verborgen, personificatie geeft menselijke eigenschappen aan niet-mensen.',
-    'Metafoor_Vergelijking': 'Metafoor is een verborgen vergelijking, vergelijking gebruikt expliciet "als" of "zoals".',
-    'Hyperbool_Litotes': 'Hyperbool overdrijft, litotes onderdrijft door het tegenovergestelde te ontkennen.',
-    'Ironie_Sarcasme': 'Beide zeggen het tegenovergestelde, maar sarcasme is scherper en bijtender bedoeld.',
-    'Paradox_Oxymoron': 'Paradox is een schijnbare tegenstrijdigheid in een hele gedachte, oxymoron combineert twee tegenstrijdige woorden.',
-    'Alliteratie_Assonantie': 'Alliteratie herhaalt medeklinkers, assonantie herhaalt klinkers.',
-    'Anafoor_Epistrofe': 'Anafoor herhaalt aan het begin, epistrofe aan het einde van zinnen.',
-    'Metonymie_Synecdoche': 'Metonymie gebruikt iets gerelateerds, synecdoche gebruikt deel-voor-geheel of geheel-voor-deel.',
-    'Climax_Anticlimax': 'Climax bouwt op naar iets groots, anticlimax eindigt teleurstellend na opbouw.'
+    'Metafoor_Personificatie': `<strong>Verschil:</strong> Metafoor vergelijkt twee verschillende dingen verborgen ("Tijd is geld"), terwijl personificatie menselijke eigenschappen geeft aan niet-mensen ("De wind fluistert").`,
+    'Metafoor_Vergelijking': `<strong>Verschil:</strong> Metafoor is een verborgen vergelijking zonder "als/zoals", terwijl een vergelijking expliciet "als" of "zoals" gebruikt.`,
+    'Hyperbool_Litotes': `<strong>Verschil:</strong> Hyperbool overdrijft enorm ("duizend keer gezegd"), litotes onderdrijft door het tegenovergestelde te ontkennen ("niet onverstandig").`,
+    'Ironie_Sarcasme': `<strong>Verschil:</strong> Beide bedoelen het tegenovergestelde, maar sarcasme is scherper, bijtender en vaak gemeen bedoeld.`,
+    'Paradox_Oxymoron': `<strong>Verschil:</strong> Paradox is een hele schijnbaar tegenstrijdige gedachte, oxymoron combineert slechts twee tegenstrijdige woorden direct.`,
+    'Alliteratie_Assonantie': `<strong>Verschil:</strong> Alliteratie herhaalt beginmedeklinkers (k-k-k), assonantie herhaalt klinkers (a-a-a, e-e-e).`,
+    'Anafoor_Epistrofe': `<strong>Verschil:</strong> Anafoor herhaalt woorden aan het BEGIN van zinnen, epistrofe aan het EINDE.`,
+    'Metonymie_Synecdoche': `<strong>Verschil:</strong> Metonymie vervangt iets door gerelateerd begrip (Witte Huis=president), synecdoche gebruikt deel-voor-geheel (handen=mensen).`,
+    'Climax_Anticlimax': `<strong>Verschil:</strong> Climax bouwt op naar iets groots, anticlimax eindigt teleurstellend of onbelangrijk na opbouw.`,
+    'Metafoor_Symboliek': `<strong>Verschil:</strong> Metafoor maakt een directe vergelijking in taal, symboliek gebruikt een object dat voor iets anders staat.`,
+    'Vergelijking_Metafoor': `<strong>Verschil:</strong> Vergelijking gebruikt expliciet "als" of "zoals", metafoor vergelijkt verborgen zonder die woorden.`
   };
   
   const key = `${correct}_${wrong}`;
   const reverseKey = `${wrong}_${correct}`;
   
   if (comparisons[key]) {
-    return comparisons[key];
+    explanation += comparisons[key];
   } else if (comparisons[reverseKey]) {
-    return comparisons[reverseKey];
+    explanation += comparisons[reverseKey];
   } else {
-    return `Let goed op de definitie en het voorbeeld. ${correct} past beter bij dit specifieke voorbeeld omdat ${example.toLowerCase()} de kenmerken van ${correct} laat zien.`;
+    explanation += `<strong>Let op:</strong> ${wrong} is iets anders. In dit voorbeeld zie je duidelijk de kenmerken van ${correct}.`;
   }
+  
+  return explanation;
 }
 
 function markAsLearned() {
