@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>📚 Woordenschat Atelier</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <header>
+            <h1>📚 Woordenschat Atelier</h1>
+            <p class="subtitle">Verrijk je Nederlandse taal</p>
+        </header>
+
+        <div class="progress-container">
+            <div class="progress-info">
+                <span id="progress-text">0 van 90 onderdelen geleerd</span>
+            </div>
+            <div class="progress-bar">
+                <div id="progress-fill" class="progress-fill"></div>
+            </div>
+        </div>
+
+        <div id="welcome-screen" class="screen">
+            <div class="welcome-content">
+                <h2>Welkom bij je taalreis</h2>
+                <p>Ontdek formele woorden en stijlfiguren uit de Nederlandse taal. Geen stress, geen tijdsdruk - alleen leren in je eigen tempo.</p>
+                <button id="start-btn" class="btn btn-primary">Begin je reis</button>
+                <button id="reset-btn" class="btn btn-secondary">Reset voortgang</button>
+            </div>
+        </div>
+
+        <div id="card-screen" class="screen hidden">
+            <div id="canvas-container"></div>
+            
+            <div id="interaction-area">
+                <!-- Flashcard mode -->
+                <div id="flashcard-mode" class="mode-container hidden">
+                    <button id="reveal-btn" class="btn btn-primary">Toon betekenis</button>
+                </div>
+
+                <!-- Quiz mode -->
+                <div id="quiz-mode" class="mode-container hidden">
+                    <input type="text" id="answer-input" class="answer-input" placeholder="Type je antwoord...">
+                    <button id="check-btn" class="btn btn-primary">Controleer</button>
+                    <div id="feedback" class="feedback hidden"></div>
+                </div>
+
+                <!-- Multiple choice mode -->
+                <div id="choice-mode" class="mode-container hidden">
+                    <div id="choices-container"></div>
+                </div>
+
+                <!-- Action buttons -->
+                <div id="action-buttons" class="action-buttons hidden">
+                    <button id="learned-btn" class="btn btn-success">✓ Geleerd</button>
+                    <button id="review-btn" class="btn btn-secondary">↻ Later herhalen</button>
+                </div>
+            </div>
+
+            <button id="skip-btn" class="skip-btn">Volgende →</button>
+        </div>
+
+        <div id="complete-screen" class="screen hidden">
+            <div class="complete-content">
+                <h2>🎉 Geweldig gedaan!</h2>
+                <p>Je hebt alle woorden en stijlfiguren gezien. Je taalreis gaat door!</p>
+                <button id="restart-btn" class="btn btn-primary">Opnieuw starten</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="data.js"></script>
+    <script src="sketch.js"></script>
+</body>
+</html>
