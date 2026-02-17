@@ -247,11 +247,22 @@ h1 {
 }
 
 .feedback {
-    padding: 16px;
+    padding: 20px;
     border-radius: 12px;
-    text-align: center;
-    font-size: 1em;
+    text-align: left;
+    font-size: 0.95em;
     margin-top: 15px;
+    line-height: 1.6;
+}
+
+.feedback strong {
+    display: block;
+    margin-bottom: 8px;
+}
+
+.feedback em {
+    color: #6B6B6B;
+    font-style: italic;
 }
 
 .feedback.hidden {
