@@ -10,6 +10,9 @@ Een educatief spel om je Nederlandse woordenschat te verrijken met formele woord
 
 - **60+ Formele Woorden**: Leer minder gebruikte maar waardevolle Nederlandse woorden
 - **30 Stijlfiguren**: Beheers literaire stijlmiddelen met praktische voorbeelden
+- **20 Vragen per Sessie**: Elke sessie bevat 20 willekeurige items uit de database van 90+ items
+- **Altijd Nieuwe Inhoud**: Door randomisatie leer je elke sessie andere woorden en stijlfiguren
+- **Educatieve Feedback**: Bij elk antwoord krijg je uitgebreide uitleg waarom het goed of fout is
 - **Mix van Leermethoden**:
   - Flashcards: Zie het woord, denk na, onthul de betekenis
   - Quiz: Lees de definitie, typ het woord
@@ -46,9 +49,11 @@ Literaire middelen die je teksten verrijken:
 
 **Leren Zonder Druk**
 - Geen scores of timers
-- Geen "fout" of "goed", alleen feedback
+- Uitgebreide uitleg bij elk antwoord (waarom goed/fout)
+- Specifieke redenen waarom stijlfiguren correct zijn
 - Leer in je eigen tempo
 - Progress tracking voor motivatie
+- Elke sessie bevat max 20 vragen voor korte, effectieve leersessies
 
 ## 🛠️ Technologie
 
@@ -95,10 +100,12 @@ Je voortgang wordt automatisch opgeslagen in je browser:
 
 ## 💡 Tips
 
-- Neem de tijd voor elk woord - geen haast!
+- Elke sessie geeft 20 willekeurige vragen - speel vaker voor meer variatie!
+- Lees de uitleg bij elk antwoord zorgvuldig - daar zit de leerkracht
 - Gebruik "Later herhalen" voor moeilijke woorden
 - Probeer nieuwe woorden te gebruiken in je dagelijkse communicatie
 - Herhaal regelmatig voor beter onthouden
+- Let bij stijlfiguren op de specifieke redenen in de uitleg
 
 ## 📝 Licentie
 
